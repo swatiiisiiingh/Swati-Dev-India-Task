@@ -13,3 +13,7 @@ It immediately checks if (isProcessing) (at Point A).
 Because processItem(item1) set isProcessing to true and hasn't set it back to false yet, this condition evaluates to true.
 
 The return; statement is executed. processItem(item2) stops right there. It never reaches isProcessing = true; or await someAsyncOperation(item2);.
+
+
+To fix this problem...
+We would require a queueing mechanism (e.g., an array acting as a queue, or a dedicated queue library) instead of just a simple isProcessing flag. But based on your explicit "should return" for item2 and item3, the current code is already correct.
