@@ -1,0 +1,15 @@
+When processItem(item1) is called:
+
+It checks isProcessing (at Point A). It's false, so it proceeds.
+
+It immediately sets isProcessing = true; (at Point B). The "busy" sign is now ON.
+
+It then hits await someAsyncOperation(item1); (at Point C). The execution of this specific processItem(item1) function pauses here, waiting for someAsyncOperation to finish. BUT, the isProcessing flag REMAINS true during this entire waiting period.
+
+When processItem(item2) is called rapidly (while item1 is still at Point C):
+
+It immediately checks if (isProcessing) (at Point A).
+
+Because processItem(item1) set isProcessing to true and hasn't set it back to false yet, this condition evaluates to true.
+
+The return; statement is executed. processItem(item2) stops right there. It never reaches isProcessing = true; or await someAsyncOperation(item2);.
